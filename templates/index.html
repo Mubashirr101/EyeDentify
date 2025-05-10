@@ -3,11 +3,76 @@
   <head>
     <title>Face Recognition Client</title>
   </head>
-  <body>
-    <h3>Client Webcam with Face Recognition</h3>
-    <video id="video" width="640" height="480" autoplay></video>
-    <canvas id="canvas" width="640" height="480" style="display: none"></canvas>
-    <p id="result">Recognized: None</p>
+  <body style="background-color: #f7f9f9">
+    <div style="color: black">
+      <div>
+        <h2 style="text-align: center">Face Authentication</h2>
+      </div>
+      <div
+        style="
+          display: flex;
+          background-color: #bed8d4;
+          color: black;
+          border-radius: 10px;
+          justify-content: space-around;
+          flex-wrap: nowrap;
+          width: 85%;
+          height: 90%;
+
+          align-items: center;
+          margin-left: auto;
+          margin-right: auto;
+        "
+      >
+        <div
+          style="margin: 20px; padding-left: 10px; flex: 1; border-radius: 10px"
+        >
+          <h3>Webcam Window</h3>
+          <video
+            style="border-radius: 10px"
+            id="video"
+            width="480"
+            height="360"
+            autoplay
+          ></video>
+          <canvas
+            id="canvas"
+            width="640"
+            height="480"
+            style="display: none"
+          ></canvas>
+          <p id="result">Recognized: None</p>
+        </div>
+        <div
+          style="
+            margin: 20px;
+            padding-left: 10px;
+            flex: 1;
+            border-radius: 10px;
+            height: 50%;
+            align-content: space-around;
+            margin-right: 20px;
+          "
+        >
+          <h3>Result</h3>
+          <div
+            class="div-result"
+            style="
+              background-color: #99c2bc;
+              border-radius: 10px;
+              padding: 20px;
+            "
+          >
+            <img src="" />
+            <p style="text-align: center">Placeholder Name</p>
+            <p style="text-align: center">Employee No. : #1234</p>
+          </div>
+          <div class="loginbtn" style="margin: 20px">
+            <button style="padding: 10px">Login</button>
+          </div>
+        </div>
+      </div>
+    </div>
 
     <script>
       const video = document.getElementById("video");
