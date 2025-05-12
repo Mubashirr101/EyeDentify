@@ -1,9 +1,9 @@
 
 ---
 
-# Eyedentify
+# EyeDentify
 
-**Eyedentify** is a real-time face recognition web application built using Flask, OpenCV, and the `face_recognition` library. It captures video from a webcam, processes the frames in real time, and identifies faces based on a set of pre-encoded images.
+**EyeDentify** is a real-time face recognition web application built using Flask, OpenCV, and the `face_recognition` library. It captures video from a webcam, processes the frames in real time, and identifies faces based on a set of pre-encoded images.
 
 ## 🚀 Features
 
