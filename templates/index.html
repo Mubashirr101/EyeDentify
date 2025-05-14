@@ -4,17 +4,20 @@
     <title>Face Recognition Client</title>
     <link
       rel="stylesheet"
-      href="{{ url_for('static', filename = 'styles.css')}}"
+      href="{{ url_for('static', filename = 'css/styles.css')}}"
     />
     <script
       defer
-      src="{{ url_for('static', filename = 'script.js') }}"
+      src="{{ url_for('static', filename = 'js/script.js') }}"
     ></script>
   </head>
   <body>
     <div class="main_div">
       <div>
-        <h2 class="title">EyeDentify</h2>
+        <img
+          class="title_img"
+          src="{{ url_for('static', filename = 'images/eyedentify_title.png') }}"
+        />
       </div>
       <div class="parent-flex">
         <div class="input">
@@ -29,7 +32,10 @@
         <div class="output">
           <h3>Result</h3>
           <div class="div-result">
-            <img src="" />
+            <img
+              class="res_img"
+              src="{{ url_for('static', filename = 'images/billgates1.jpeg')}}"
+            />
             <p class="results">Placeholder Name</p>
             <p class="results">Employee No. : #1234</p>
           </div>

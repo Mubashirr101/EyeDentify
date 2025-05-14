@@ -18,3 +18,5 @@ dist/
 build/
 
 .env
+
+supabase_client.py

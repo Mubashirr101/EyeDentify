@@ -6,6 +6,7 @@ import face_recognition
 import base64
 from io import BytesIO
 from PIL import Image
+from supabase import create_client, Client
 
 app = Flask(__name__)
 

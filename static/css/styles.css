@@ -4,8 +4,10 @@ body {
 .main_div {
  color: black;
 }
-.title {
- text-align: center;
+.title_img {
+ display: block;
+ margin-left: auto;
+ margin-right: auto;
 }
 #loginbtn {
  padding: 10px 20px;
@@ -30,7 +32,7 @@ body {
  justify-content: space-around;
  flex-wrap: nowrap;
  width: 85%;
- height: 90%;
+ height: 85%;
  align-items: center;
  margin-left: auto;
  margin-right: auto;
@@ -66,12 +68,25 @@ body {
  height: 50%;
  align-content: space-around;
  margin-right: 20px;
+ display: flex;
+ flex-direction: column;
+ align-items: center;
+ justify-content: center;
 }
 
 .div-result {
  background-color: #99c2bc;
  border-radius: 10px;
  padding: 20px;
+ width: 60%;
+ /* margin: 0 auto; */
+}
+
+.res_img {
+ display: block;
+ margin: auto;
+ width: 100%;
+ border-radius: 10px;
 }
 .results {
  text-align: center;
