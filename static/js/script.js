@@ -2,7 +2,10 @@ const video = document.getElementById("video");
 const canvas = document.getElementById("canvas");
 const resultText = document.getElementById("result");
 const context = canvas.getContext("2d");
-
+const pname = document.getElementById("name")
+const pid = document.getElementById("empId")
+const pdept = document.getElementById("dept")
+const plogintime = document.getElementById("lastloggedin")
 // Start the webcam stream
 navigator.mediaDevices
 .getUserMedia({ video: true })
@@ -26,6 +29,11 @@ fetch("/process_frame", {
     .then((response) => response.json())
     .then((data) => {
     resultText.textContent = `Recognized: ${data.name}`;
+    pname.textContent = `Name: ${data.name}`;
+    pid.textContent = `ID: ${data.id}`;
+    pdept.textContent = `DEPT: ${data.department}`;
+    plogintime.textContent = `Last Login: ${data.last_LoggedIn}`;
+
     })
     .catch((err) => {
     console.error("Error sending frame:", err);
