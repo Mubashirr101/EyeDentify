@@ -1,0 +1,78 @@
+body {
+ background-color: #f7f9f9
+}
+.main_div {
+ color: black;
+}
+.title {
+ text-align: center;
+}
+#loginbtn {
+ padding: 10px 20px;
+ font-size: 16px;
+ color: white;
+ background-color: #28a745;
+ border: none;
+ border-radius: 5px;
+ cursor: pointer;
+ margin: 20px;
+}
+
+#loginbtn:hover {
+ background-color: #218838;
+}
+
+.parent-flex {
+ display: flex;
+ background-color: #bed8d4;
+ color: black;
+ border-radius: 10px;
+ justify-content: space-around;
+ flex-wrap: nowrap;
+ width: 85%;
+ height: 90%;
+ align-items: center;
+ margin-left: auto;
+ margin-right: auto;
+}
+.input {
+ margin: 20px; 
+ padding-left: 10px;
+ flex: 1; 
+ border-radius: 10px;
+}
+ 
+#video {
+ border-radius: 10px;           
+}
+
+#canvas {
+ display: none;
+}
+.vertical-divider {
+ width: 2px;
+ background: #99c2bc;
+ min-height: 100%;
+ margin: 0 10px;
+ border-radius: 2px;
+ align-self: stretch;
+}
+
+.output {
+ margin: 20px;
+ padding-left: 10px;
+ flex: 1;
+ border-radius: 10px;
+ height: 50%;
+ align-content: space-around;
+ margin-right: 20px;
+}
+
+.div-result {
+ background-color: #99c2bc;
+ border-radius: 10px;
+ padding: 20px;
+}
+.results {
+ text-align: center;
+}
