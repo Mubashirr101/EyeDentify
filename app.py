@@ -74,7 +74,7 @@ def process_frame():
                 # time-interval based repeated entires prevention in eyetandance & eyesuite
 
                 # log the login time
-                now = datetime.now()
+                # now = datetime.now()
 
                 # get emp data
 
