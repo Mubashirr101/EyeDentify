@@ -10,6 +10,7 @@
 * 🔍 Real-time face recognition using webcam
 * 🧠 Utilizes pre-trained face encodings from local image files
 * 🖥️ Web-based UI with live video and recognition feedback
+* 🗃️ Supabase server for database and cloud storage
 * 🧰 Modular and easy-to-extend code structure
 
 ## 🛠️ Tech Stack
@@ -17,16 +18,17 @@
 * **Frontend**: HTML5, JavaScript (WebRTC, Canvas API)
 * **Backend**: Python (Flask)
 * **Libraries**: OpenCV, face\_recognition, NumPy, Pillow
+* **Database**: Supabase
 
 
 ## 🖼️ Preparing Your Dataset
 
-1. Place clear face images in the `ImagesBasic/` folder.
+1. Place clear face images in the `Images/` folder.
 2. Each image file name (without extension) will be used as the label.
 3. Example:
 
    ```
-   ImagesBasic/
+   Images/
    ├── Alice.jpg
    ├── Bob.png
    ```
@@ -60,10 +62,11 @@ Then open your browser and go to: [http://localhost:5000](http://localhost:5000)
 
 ## 🧪 How It Works
 
-* On launch, the app encodes all face images from `ImagesBasic/`.
+* On launch, the app encodes all face images from `Images/`.
 * The browser captures webcam frames and sends them to the backend.
 * The backend compares the incoming face encodings with the known ones.
-* A match displays the recognized name in the web UI.
+* The details and ID of the matched face are fetched from the supabase server.
+* They are then displayed in the UI.
 
 
 
