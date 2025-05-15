@@ -18,7 +18,7 @@
 * **Frontend**: HTML5, JavaScript (WebRTC, Canvas API)
 * **Backend**: Python (Flask)
 * **Libraries**: OpenCV, face\_recognition, NumPy, Pillow
-* **Server**: Supabase
+* **Database**: Supabase
 
 
 ## 🖼️ Preparing Your Dataset
