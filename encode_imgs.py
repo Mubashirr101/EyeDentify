@@ -12,15 +12,31 @@ images = []
 empID = []
 myList = os.listdir(path)
 
+# check existing imgs from database
+existingfiles = []
+try:
+    res = supabase2.storage.from_("emp-images").list("Images")
+    if res:
+        existingfiles = [item["name"] for item in res]
+except Exception as e:
+    print(f"Couldnt fetch existing files:{e}")
+
+
 # adding all the imgs and their names in 2 individual arrays
 for cl in myList:
     curImg = cv2.imread(f"{path}/{cl}")
     images.append(curImg)
     empID.append(os.path.splitext(cl)[0])
 
+    # check for duplicates
+    if cl in existingfiles:
+        print(f"Skipping upload for {cl}: already exists in the database")
     imgpath = os.path.join(path, cl)
-    with open(imgpath, "rb") as f:
-        supabase2.storage.from_("emp-images").upload(f"Images/{cl}", f)
+    try:
+        with open(imgpath, "rb") as f:
+            supabase2.storage.from_("emp-images").upload(f"Images/{cl}", f)
+    except Exception as e:
+        print(f"Error:")
 
 
 print("emp id: ", empID)

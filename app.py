@@ -78,17 +78,18 @@ def process_frame():
 
                 # get emp data
 
-                res = supabase1.table("emp").select("*").eq("id", emp_id).execute()
-                emp = res.data[0]
-                name = emp["name"]
-                last_loggedIn = emp.get("last_attendance_time", "N/A")  # or None or ""
-                department = emp["department"]
-                # total_attendance = emp["total_attendance"]
-
-                # update the login time
-                supabase1.table("emp").update(
-                    {"last_attendance_time": datetime.now().isoformat()}
-                ).eq("id", emp_id).execute()
+                try:
+                    res = supabase1.table("emp").select("*").eq("id", emp_id).execute()
+                    emp = res.data[0]
+                    name = emp["name"]
+                    last_loggedIn = emp.get("last_attendance_time", "N/A")
+                    department = emp["department"]
+                    supabase1.table("emp").update(
+                        {"last_attendance_time": datetime.now().isoformat()}
+                    ).eq("id", emp_id).execute()
+                except Exception as e:
+                    print(f"Error fetching or updating employee data: {e}")
+                    # Optionally, return a JSON error response here
 
                 break
 
