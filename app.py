@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, render_template, request, jsonify, url_for
 import cv2
 import os
 import numpy as np
@@ -6,7 +6,7 @@ import face_recognition
 import base64
 from io import BytesIO
 from PIL import Image
-from supabase_client import supabase1
+from supabase_client import supabase1, supabase2
 from datetime import datetime, timedelta
 import pickle
 from dotenv import load_dotenv
@@ -47,6 +47,7 @@ def process_frame():
     name = "Unknown"
     last_loggedIn = "Unknown"
     department = "Unknown"
+    imgurl = url_for("static", filename="images/placeholderavatar.png")
 
     for encodeFace, faceLoc in zip(encodesCurFrame, facesCurFrame):
         matches = face_recognition.compare_faces(knownEncodelist, encodeFace)
@@ -84,6 +85,14 @@ def process_frame():
                     name = emp["name"]
                     last_loggedIn = emp.get("last_attendance_time", "N/A")
                     department = emp["department"]
+
+                    fetchimg = supabase2.storage.from_("emp-images").create_signed_url(
+                        f"Images/{emp_id}.jpg", 3600
+                    )
+
+                    imgurl = fetchimg["signedURL"]
+                    print(imgurl)
+
                     supabase1.table("emp").update(
                         {"last_attendance_time": datetime.now().isoformat()}
                     ).eq("id", emp_id).execute()
@@ -99,6 +108,7 @@ def process_frame():
             "id": emp_id,
             "department": department,
             "last_LoggedIn": last_loggedIn,
+            "imgurl": imgurl,
         }
     )
 

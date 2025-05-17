@@ -6,6 +6,7 @@ const pname = document.getElementById("name")
 const pid = document.getElementById("empId")
 const pdept = document.getElementById("dept")
 const plogintime = document.getElementById("lastloggedin")
+const imurl = document.getElementById("loginavatar")
 // Start the webcam stream
 navigator.mediaDevices
 .getUserMedia({ video: true })
@@ -33,7 +34,7 @@ fetch("/process_frame", {
     pid.textContent = `ID: ${data.id}`;
     pdept.textContent = `DEPT: ${data.department}`;
     plogintime.textContent = `Last Login: ${data.last_LoggedIn}`;
-
+    imurl.src = `${data.imgurl}`
     })
     .catch((err) => {
     console.error("Error sending frame:", err);
