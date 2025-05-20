@@ -83,7 +83,13 @@ def process_frame():
                     res = supabase1.table("emp").select("*").eq("id", emp_id).execute()
                     emp = res.data[0]
                     name = emp["name"]
-                    last_loggedIn = emp.get("last_attendance_time", "N/A")
+                    last_logged_In = emp.get("last_attendance_time", "N/A")
+                    try:
+                        dt = datetime.fromisoformat(last_logged_In)
+                        dt = dt.strftime("%d-%m-%Y %H:%M")
+                    except ValueError:
+                        dt = "N/A"
+                    last_loggedIn = dt
                     department = emp["department"]
 
                     fetchimg = supabase2.storage.from_("emp-images").create_signed_url(

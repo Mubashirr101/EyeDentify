@@ -59,6 +59,7 @@ navigator.mediaDevices
 .catch((err) => {
     console.error("Camera access error: ", err);
 });
+startrecogloop()
 
 //reset on retake
 retakebtn.addEventListener("click",()=> {

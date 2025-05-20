@@ -32,21 +32,22 @@
         <div class="output">
           <h3>Result</h3>
           <div class="div-result">
-            <img
-              width="480"
-              height="360"
-              class="loginavatar"
-              id="loginavatar"
-              src="{{ url_for('static', filename = 'images/placeholderavatar.png')}}"
-            />
+            <div class="photocontainer">
+              <img
+                class="loginavatar"
+                id="loginavatar"
+                src="{{ url_for('static', filename = 'images/placeholderavatar.png')}}"
+              />
+            </div>
+
             <p id="name" class="results">Name</p>
             <p id="empId" class="results">Employee Number</p>
             <p id="dept" class="results">Department</p>
             <p id="lastloggedin" class="results">Last Login Time</p>
           </div>
           <div class="loginbtns">
-            <button id="loginbtn">Login</button>
             <button id="retake">Retake</button>
+            <button id="loginbtn">Login</button>
           </div>
         </div>
       </div>
