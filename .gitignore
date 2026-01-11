@@ -19,3 +19,8 @@ build/
 
 .env
 
+dataset/
+Images/
+notebooks/
+scripts/
+Training_images
