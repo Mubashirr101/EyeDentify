@@ -10,6 +10,12 @@ RUN apt-get update && apt-get install -y \
     && rm -rf /var/lib/apt/lists/*
 
 COPY requirements.txt .
+
+# Alternative: build dlib with limited jobs to cap memory usage
+RUN pip install --no-cache-dir cmake
+RUN CMAKE_BUILD_PARALLEL_LEVEL=1 pip install --no-cache-dir dlib==19.24.4
+
+# Now install everything else
 RUN pip install --no-cache-dir -r requirements.txt
 
 COPY . .
