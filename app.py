@@ -93,8 +93,8 @@ def process_frame():
                         dt = datetime.fromisoformat(last_logged_In.replace('Z', '+00:00'))
                         # Ensure it's treated as UTC
                         dt_utc = dt.replace(tzinfo=tz.UTC)
-                        # Convert to local time
-                        dt_local = dt_utc.astimezone(tz.tzlocal())
+                        # Convert to local time for india
+                        dt_local = dt_utc.astimezone(tz.gettz("Asia/Kolkata"))
                         dt = dt_local.strftime("%d-%m-%Y %H:%M")
                     except ValueError:
                         dt = "N/A"
@@ -154,7 +154,7 @@ def login():
                 #convert to local time for display
                 dt = datetime.fromisoformat(last_time.replace('Z', '+00:00'))
                 dt_utc = dt.replace(tzinfo=tz.UTC)
-                dt_local = dt_utc.astimezone(tz.tzlocal())
+                dt_local = dt_utc.astimezone(tz.gettz("Asia/Kolkata")) # indian time
                 last_time = dt_local.strftime("%d-%m-%Y %H:%M")
             except ValueError:
                 last_time = "N/A"
