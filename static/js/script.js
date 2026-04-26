@@ -72,7 +72,7 @@ retakebtn.addEventListener("click",()=> {
         pid.textContent = "ID";
         pdept.textContent = "Department";
         plogintime.textContent = "Last Login Time";
-        imurl.src = "static/images/placeholderavatar.png";
+        imurl.src = "static/imagess/placeholderavatarr.png";
 
         hasMatched = false;
         isProcessing = false;

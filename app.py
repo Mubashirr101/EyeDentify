@@ -48,7 +48,7 @@ def process_frame():
     name = "Unknown"
     last_loggedIn = "Unknown"
     department = "Unknown"
-    imgurl = url_for("static", filename="images/placeholderavatar.png")
+    imgurl = url_for("static", filename="imagess/placeholderavatarr.png")
 
     for encodeFace, faceLoc in zip(encodesCurFrame, facesCurFrame):
         matches = face_recognition.compare_faces(knownEncodelist, encodeFace)
