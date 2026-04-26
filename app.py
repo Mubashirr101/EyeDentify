@@ -8,6 +8,7 @@ from io import BytesIO
 from PIL import Image
 from supabase_client import supabase1, supabase2
 from datetime import datetime, timedelta
+from dateutil import tz
 import pickle
 from dotenv import load_dotenv
 
@@ -88,8 +89,13 @@ def process_frame():
                         last_logged_In = "N/A"
                     print(last_logged_In)
                     try:
-                        dt = datetime.fromisoformat(last_logged_In)
-                        dt = dt.strftime("%d-%m-%Y %H:%M")
+                        # Parssingg the UTC timestamp from Supabase 
+                        dt = datetime.fromisoformat(last_logged_In.replace('Z', '+00:00'))
+                        # Ensure it's treated as UTC
+                        dt_utc = dt.replace(tzinfo=tz.UTC)
+                        # Convert to local time
+                        dt_local = dt_utc.astimezone(tz.tzlocal())
+                        dt = dt_local.strftime("%d-%m-%Y %H:%M")
                     except ValueError:
                         dt = "N/A"
                     last_loggedIn = dt
@@ -102,12 +108,9 @@ def process_frame():
                     imgurl = fetchimg["signedURL"]
                     print(imgurl)
 
-                    # supabase1.table("emp").update(
-                    #     {"last_attendance_time": datetime.now().isoformat()}
-                    # ).eq("id", emp_id).execute()
+                    
                 except Exception as e:
                     print(f"Error fetching or updating employee data: {e}")
-                    # Optionally, return a JSON error response here
 
                 break
 
@@ -131,15 +134,15 @@ def login():
     
     print(f"Login attempt for emp_id: {emp_id}")
     try:
-        # Update the last_attendance_time
-        now_iso = datetime.now().isoformat()
-        print(f"Updating with time: {now_iso}")
+        # getting current UTC time and storing in UTC
+        now_utc = datetime.now(tz.UTC).isoformat()
+        print(f"Updating with UTC time: {now_utc}")
         supabase1.table("emp").update(
-            {"last_attendance_time": now_iso}
+            {"last_attendance_time": now_utc}
         ).eq("id", emp_id).execute()
         print("Update executed")
         
-        # Fetch the updated time for response
+        # getting da updated time for response
         res = supabase1.table("emp").select("last_attendance_time").eq("id", emp_id).execute()
         print(f"Fetch result: {res.data}")
         last_time = res.data[0]["last_attendance_time"]
@@ -148,8 +151,11 @@ def login():
             last_time = "N/A"
         else:
             try:
-                dt = datetime.fromisoformat(last_time)
-                last_time = dt.strftime("%d-%m-%Y %H:%M")
+                #convert to local time for display
+                dt = datetime.fromisoformat(last_time.replace('Z', '+00:00'))
+                dt_utc = dt.replace(tzinfo=tz.UTC)
+                dt_local = dt_utc.astimezone(tz.tzlocal())
+                last_time = dt_local.strftime("%d-%m-%Y %H:%M")
             except ValueError:
                 last_time = "N/A"
         
