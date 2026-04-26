@@ -1,18 +1,24 @@
-FROM continuumio/miniconda3
+FROM python:3.11-slim
 
 WORKDIR /app
 
-RUN conda install -c conda-forge python=3.11 dlib git -y
+RUN apt-get update && apt-get install -y \
+    build-essential \
+    cmake \
+    libopenblas-dev \
+    liblapack-dev \
+    git \
+    && rm -rf /var/lib/apt/lists/*
 
 COPY requirements.txt .
 
-# Install face_recognition_models from GitHub explicitly
+RUN pip install --no-cache-dir dlib==19.24.4 --global-option="--no" DLIB_USE_CUDA
 RUN pip install --no-cache-dir git+https://github.com/ageitgey/face_recognition_models
-
+RUN pip install --no-cache-dir face-recognition==1.3.0
 RUN pip install --no-cache-dir -r requirements.txt
 
 COPY . .
 
 EXPOSE 10000
 
-CMD ["gunicorn", "-w", "2", "-b", "0.0.0.0:10000", "app:app"]
+CMD ["gunicorn", "-w", "1", "-b", "0.0.0.0:10000", "app:app"]
