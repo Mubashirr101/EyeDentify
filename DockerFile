@@ -2,9 +2,13 @@ FROM continuumio/miniconda3
 
 WORKDIR /app
 
-RUN conda install -c conda-forge python=3.11 dlib -y
+RUN conda install -c conda-forge python=3.11 dlib git -y
 
 COPY requirements.txt .
+
+# Install face_recognition_models from GitHub explicitly
+RUN pip install --no-cache-dir git+https://github.com/ageitgey/face_recognition_models
+
 RUN pip install --no-cache-dir -r requirements.txt
 
 COPY . .
