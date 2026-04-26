@@ -84,6 +84,9 @@ def process_frame():
                     emp = res.data[0]
                     name = emp["name"]
                     last_logged_In = emp.get("last_attendance_time", "N/A")
+                    if last_logged_In is None:
+                        last_logged_In = "N/A"
+                    print(last_logged_In)
                     try:
                         dt = datetime.fromisoformat(last_logged_In)
                         dt = dt.strftime("%d-%m-%Y %H:%M")
@@ -99,9 +102,9 @@ def process_frame():
                     imgurl = fetchimg["signedURL"]
                     print(imgurl)
 
-                    supabase1.table("emp").update(
-                        {"last_attendance_time": datetime.now().isoformat()}
-                    ).eq("id", emp_id).execute()
+                    # supabase1.table("emp").update(
+                    #     {"last_attendance_time": datetime.now().isoformat()}
+                    # ).eq("id", emp_id).execute()
                 except Exception as e:
                     print(f"Error fetching or updating employee data: {e}")
                     # Optionally, return a JSON error response here
@@ -117,6 +120,43 @@ def process_frame():
             "imgurl": imgurl,
         }
     )
+
+
+@app.route("/login", methods=["POST"])
+def login():
+    data = request.get_json()
+    emp_id = data.get("emp_id")
+    if not emp_id:
+        return jsonify({"success": False, "message": "Employee ID missing"})
+    
+    print(f"Login attempt for emp_id: {emp_id}")
+    try:
+        # Update the last_attendance_time
+        now_iso = datetime.now().isoformat()
+        print(f"Updating with time: {now_iso}")
+        supabase1.table("emp").update(
+            {"last_attendance_time": now_iso}
+        ).eq("id", emp_id).execute()
+        print("Update executed")
+        
+        # Fetch the updated time for response
+        res = supabase1.table("emp").select("last_attendance_time").eq("id", emp_id).execute()
+        print(f"Fetch result: {res.data}")
+        last_time = res.data[0]["last_attendance_time"]
+        print(f"Last time fetched: {last_time}")
+        if last_time is None:
+            last_time = "N/A"
+        else:
+            try:
+                dt = datetime.fromisoformat(last_time)
+                last_time = dt.strftime("%d-%m-%Y %H:%M")
+            except ValueError:
+                last_time = "N/A"
+        
+        return jsonify({"success": True, "last_LoggedIn": last_time})
+    except Exception as e:
+        print(f"Error in login: {e}")
+        return jsonify({"success": False, "message": str(e)})
 
 
 if __name__ == "__main__":

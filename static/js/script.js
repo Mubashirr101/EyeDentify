@@ -8,10 +8,12 @@ const pdept = document.getElementById("dept")
 const plogintime = document.getElementById("lastloggedin")
 const imurl = document.getElementById("loginavatar")
 const retakebtn = document.getElementById("retake")
+const loginbtn = document.getElementById("loginbtn")
 
 let intervalId = null;
 let isProcessing = false;
 let hasMatched = false;
+let currentEmpId = null;
 
 function startrecogloop(){
     intervalId = setInterval(() => {
@@ -39,6 +41,7 @@ function startrecogloop(){
                 clearInterval(intervalId);
                 intervalId = null;
                 hasMatched = true;
+                currentEmpId = data.id;
             }
            })
             .catch((err) => {
@@ -73,7 +76,33 @@ retakebtn.addEventListener("click",()=> {
 
         hasMatched = false;
         isProcessing = false;
+        currentEmpId = null;
         startrecogloop();
     }
 }
 );
+
+//login button
+loginbtn.addEventListener("click", () => {
+    if (currentEmpId && hasMatched) {
+        fetch("/login", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ emp_id: currentEmpId }),
+        })
+        .then((response) => response.json())
+        .then((data) => {
+            if (data.success) {
+                alert("Login successful!");
+                plogintime.textContent = `Last Login: ${data.last_LoggedIn}`;
+            } else {
+                alert("Login failed: " + data.message);
+            }
+        })
+        .catch((err) => {
+            console.error("Error logging in:", err);
+        });
+    } else {
+        alert("No employee recognized. Please try again.");
+    }
+});

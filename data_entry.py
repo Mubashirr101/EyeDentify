@@ -1,5 +1,5 @@
 import supabase
-from supabase_client import supabase
+from supabase_client import supabase1
 
 
 # Data for 20 employees
@@ -189,5 +189,5 @@ employees = [
 
 # Insert into Supabase
 for emp in employees:
-    res = supabase.table("emp").insert(emp).execute()
+    res = supabase1.table("emp").insert(emp).execute()
     print(f"Inserted {emp['name']} successfully.")
