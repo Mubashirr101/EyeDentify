@@ -1,6 +1,11 @@
-# EyeDentify
+# [EyeDentify](https://eyedentify-app.onrender.com/)
 
 **EyeDentify** is a real-time face recognition web application built using Flask, OpenCV, and the `face_recognition` library. It captures video from a webcam, processes the frames in real time, and identifies faces based on a set of pre-encoded images. The app uses [Supabase](https://supabase.com/) for both facial data (Postgres) and cloud image storage.
+
+Deployed at https://eyedentify-app.onrender.com/
+
+> Render may take up to 50s to spool up the app, it's worth the wait :)
+
 
 ---
 
