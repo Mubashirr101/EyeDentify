@@ -2,6 +2,12 @@
 <html lang="en">
   <head>
     <title>Face Recognition Client</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap"
+      rel="stylesheet"
+    />
     <link
       rel="stylesheet"
       href="{{ url_for('static', filename = 'css/styles.css')}}"
@@ -13,44 +19,91 @@
   </head>
   <body>
     <div class="main_div">
-      <div>
+
+      <!-- Header -->
+      <div class="header-area">
         <img
           class="title_img"
           src="{{ url_for('static', filename = 'imagess/title_logo.png') }}"
+          alt="Logo"
         />
+        <div class="header-badge">
+          <span class="badge-dot"></span>
+          Biometric Attendance System
+        </div>
       </div>
+
+      <!-- Main card -->
       <div class="parent-flex">
+
+        <!-- LEFT — Webcam -->
         <div class="input">
-          <h3>Webcam Window</h3>
-          <video id="video" width="480" height="360" autoplay></video>
-          <canvas id="canvas" width="640" height="480"></canvas>
+          <h3>Live Feed</h3>
+
+          <div class="video-wrapper">
+            <div class="scan-line"></div>
+            <span class="corner-bl"></span>
+            <span class="corner-br"></span>
+            <video id="video" width="480" height="360" autoplay></video>
+            <canvas id="canvas" width="640" height="480"></canvas>
+          </div>
+
           <p id="result">Recognized: None</p>
         </div>
 
+        <!-- Divider -->
         <div class="vertical-divider"></div>
 
+        <!-- RIGHT — Output -->
         <div class="output">
-          <h3>Result</h3>
+          <h3>Identity Result</h3>
+
           <div class="div-result">
+            <!-- Avatar -->
             <div class="photocontainer">
               <img
                 class="loginavatar"
                 id="loginavatar"
                 src="{{ url_for('static', filename = 'imagess/placeholderavatarr.png')}}"
+                alt="Employee Avatar"
               />
             </div>
 
-            <p id="name" class="results">Name</p>
-            <p id="empId" class="results">Employee Number</p>
-            <p id="dept" class="results">Department</p>
-            <p id="lastloggedin" class="results">Last Login Time</p>
+            <!-- Info rows -->
+            <div class="info-grid">
+              <div class="info-row">
+                <span class="info-label">Name</span>
+                <p id="name" class="results">—</p>
+              </div>
+              <div class="info-row">
+                <span class="info-label">Emp&nbsp;ID</span>
+                <p id="empId" class="results">—</p>
+              </div>
+              <div class="info-row">
+                <span class="info-label">Dept</span>
+                <p id="dept" class="results">—</p>
+              </div>
+              <div class="info-row">
+                <span class="info-label">Last&nbsp;Login</span>
+                <p id="lastloggedin" class="results">—</p>
+              </div>
+            </div>
           </div>
+
+          <!-- Buttons -->
           <div class="loginbtns">
-            <button id="retake">Retake</button>
-            <button id="loginbtn">Login</button>
+            <button id="retake">↺ &nbsp;Retake</button>
+            <button id="loginbtn">Mark&nbsp;Attendance</button>
           </div>
         </div>
+
       </div>
+
+      <!-- Footer -->
+      <div class="footer-strip">
+        Secured by <span>Face Recognition</span> &nbsp;·&nbsp; AES-256 Encrypted
+      </div>
+
     </div>
   </body>
 </html>

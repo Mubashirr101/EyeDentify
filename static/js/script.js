@@ -31,10 +31,10 @@ function startrecogloop(){
             .then((response) => response.json())
             .then((data) => {
             resultText.textContent = `Recognized: ${data.name}`;
-            pname.textContent = `Name: ${data.name}`;
-            pid.textContent = `ID: ${data.id}`;
-            pdept.textContent = `DEPT: ${data.department}`;
-            plogintime.textContent = `Last Login: ${data.last_LoggedIn}`;
+            pname.textContent = `${data.name}`;
+            pid.textContent = `${data.id}`;
+            pdept.textContent = `${data.department}`;
+            plogintime.textContent = `${data.last_LoggedIn}`;
             imurl.src = `${data.imgurl}`
 
             if (data.name!=="Unknown"){
@@ -68,10 +68,10 @@ startrecogloop()
 retakebtn.addEventListener("click",()=> {
     if (!intervalId){
         resultText.textContent = "Recognized: None";
-        pname.textContent = "Name";
-        pid.textContent = "ID";
-        pdept.textContent = "Department";
-        plogintime.textContent = "Last Login Time";
+        pname.textContent = "";
+        pid.textContent = "";
+        pdept.textContent = "";
+        plogintime.textContent = "";
         imurl.src = "static/imagess/placeholderavatarr.png";
 
         hasMatched = false;
@@ -94,7 +94,7 @@ loginbtn.addEventListener("click", () => {
         .then((data) => {
             if (data.success) {
                 alert("Login successful!");
-                plogintime.textContent = `Last Login: ${data.last_LoggedIn}`;
+                plogintime.textContent = `${data.last_LoggedIn}`;
             } else {
                 alert("Login failed: " + data.message);
             }
