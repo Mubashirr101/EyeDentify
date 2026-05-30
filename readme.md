@@ -61,7 +61,7 @@ See [`supabase_client.py`](supabase_client.py):
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/yourusername/eyedentify.git
+git clone https://github.com/Mubashirr101/EyeDentify.git
 cd eyedentify
 ```
 
